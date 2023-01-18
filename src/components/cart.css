@@ -329,6 +329,20 @@ header {
 .card-total .clear-cart:hover {
   background-color: rgb(197, 5, 5);
 }
+.slot-available {
+ display: flex;
+  gap: 50px;
+}
+
+.date-slot{
+  display: flex;
+  gap: 20px;
+}
+
+.dateformat{
+  display: flex;
+   gap: 10px;
+}
 
 /* responsive media queries  */
 

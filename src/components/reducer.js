@@ -22,6 +22,7 @@ export const reducer=(state, action)=>{
         return {...state, item: updatedCart}
     }
 
+
     if(action.type === "DECREMENT"){
         let updatedCart = state.item.map((currElem)=>{
             if(currElem.id === action.payload){

@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useReducer} from 'react';
 import './cart.css';
-
 import { products } from './product';
 import ContextCart from './ContextCart';
 import {reducer} from './reducer'
@@ -25,6 +24,8 @@ const clearCart=()=>{
     return dispatch({type:"CLEAR_CART"})
 }
 
+
+
 const increment =(id)=>{
     return dispatch({
         type:"INCREMENT",
@@ -41,7 +42,6 @@ const decrement = (id)=>{
 
 useEffect(()=>{
     dispatch({type:"GET_TOTAL"})
-   
 },[state.item])
 
   return (  

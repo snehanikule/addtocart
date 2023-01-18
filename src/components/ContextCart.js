@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import Items from './Items';
 
 import { cartContext } from './Cart';
 
-const ContextCart = () => {
-
-    const { item, totalAmount, totalItem, clearCart } = useContext(cartContext);
+const ContextCart = ({id, title, description, price, img, quantity}) => {
+  
+    const { item, totalAmount, totalItem, clearCart, increment} = useContext(cartContext);
     if (item.length === 0) {
         return (
             <>
@@ -55,6 +55,10 @@ const ContextCart = () => {
                         </Scrollbars>
                     </div>
                 </div>
+                <div>
+                    <button onClick={() => increment(id)}>Add Repairing services</button>
+                </div>
+                
                 <div className='card-total'>
                     <h3>Total Amount : <span>₹{totalAmount} </span></h3>
                     <button>Checkout Service</button>

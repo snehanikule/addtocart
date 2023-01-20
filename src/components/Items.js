@@ -5,38 +5,42 @@ import moment from "moment";
 
 const Items = ({ id, title, description, price, img, quantity }) => {
   const { removeItem, increment, decrement } = useContext(cartContext)
-  
+  const [fourHoursLater, setFourHoursLater] = useState(null);
   const dates = [];
   const today = moment();
   for (let i = 0; i < 5; i++) {
     dates.push(moment(today).add(i, 'days'));
   }
-  console.log(dates);
-
- 
-const [timeSlots, setTimeSlots] = useState([]);
-const createTimeSlots = (fromTime, toTime) =>{
-  let startTime = moment(fromTime,'hh A');
-  let endTime = moment(toTime, 'hh A');
-  if(endTime.isBefore(startTime)){
-    endTime.add(1, 'day');
-  }
-  let arr =[];
-  while(startTime <= endTime){
-    arr.push(new moment(startTime).format('hh A'))
-    startTime.add(1,'hours');
-  }
-  return arr;
-};
-React.useEffect(()=>{
-  setTimeSlots(createTimeSlots('10 AM','06 PM'))
-},[])
-
-const dateHandler=()=>{
   
-  let futureDate = dates.add(4, 'hours');
-  console.log(futureDate.format());
-}
+
+
+  const [timeSlots, setTimeSlots] = useState([]);
+  const createTimeSlots = (fromTime, toTime) => {
+    let startTime = moment(fromTime, 'hh A');
+    let endTime = moment(toTime, 'hh A');
+    if (endTime.isBefore(startTime)) {
+      endTime.add(1, 'day');
+    }
+    let arr = [];
+    while (startTime <= endTime) {
+      arr.push(new moment(startTime).format('hh A'))
+      startTime.add(1, 'hours');
+    }
+    return arr;
+  };
+  React.useEffect(() => {
+    setTimeSlots(createTimeSlots('10 AM', '06 PM'))
+    dateHandler();
+  }, [])
+
+  const dateHandler = () => {
+    const currentTime = new Date();
+    // const laterTime = new Date(currentTime);
+    // laterTime.setHours(currentTime.getHours() + 4);
+    // setFourHoursLater(laterTime);
+  console.log(currentTime);
+
+  }
 
   return (
     <>
@@ -64,41 +68,41 @@ const dateHandler=()=>{
             className="fas fa-trash-alt remove" onClick={() => removeItem(id)}
           ></i>
         </div>
-        
-          <div className="slot-available">
-            <div>
+
+        <div className="slot-available">
+          <div>
             <h3>Select Date of service</h3>
             <div className="date-slot"  >
-            {
-              dates.map((date) => {
-                return (
-                  <p key={date} onClick={dateHandler}>
-                    {date.format('DD')}
-                  </p>
-                )
-              })
-            }
-            </div>
-            </div>
-            <div>
-            <h3>Available Slots</h3>
-            <div  className="dateformat">
-            {
-              timeSlots.map((time, index)=>{
-             return(
-              <p>{time}
-              {timeSlots[index+1] ? " - " + timeSlots[index+1] : ' '}
-              </p>
-             )
-              })
-            }
-           
-            </div>
+              {
+                dates.map((date) => {
+                  return (
+                    <button key={date} onClick={dateHandler}>
+                      {date.format('DD')}
+                    </button>
+                  )
+                })
+              }
             </div>
           </div>
-         
+          <div>
+            <h3>Available Slots</h3>
+            <div className="dateformat">
+              {
+                timeSlots.map((time, index) => {
+                  return (
+                    <p>{time}
+                      {timeSlots[index + 1] ? " - " + timeSlots[index + 1] : ' '}
+                    </p>
+                  )
+                })
+              }
 
-        
+            </div>
+          </div>
+        </div>
+
+
+
       </div><hr />
     </>
   );

@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import Items from './Items';
+import { useNavigate } from 'react-router-dom';
 
 import { cartContext } from './Cart';
 
-const ContextCart = ({id, title, description, price, img, quantity}) => {
-  
-    const { item, totalAmount, totalItem, clearCart, increment} = useContext(cartContext);
+const ContextCart = () => {
+    let navigate = useNavigate();
+    const addRepair=()=>{
+           navigate("/ProductDetail")
+    }
+    const { item, totalAmount, totalItem, clearCart} = useContext(cartContext);
     if (item.length === 0) {
         return (
             <>
@@ -56,7 +60,10 @@ const ContextCart = ({id, title, description, price, img, quantity}) => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => increment(id)}>Add Repairing services</button>
+               
+             <button onClick={addRepair}>Add Repairing services</button>
+             
+                   
                 </div>
                 
                 <div className='card-total'>

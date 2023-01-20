@@ -87,16 +87,13 @@ const Items = ({ id, title, description, price, img, quantity }) => {
           <div>
             <h3>Available Slots</h3>
             <div className="dateformat">
-              {
-                timeSlots.map((time, index) => {
-                  return (
-                    <p>{time}
-                      {timeSlots[index + 1] ? " - " + timeSlots[index + 1] : ' '}
-                    </p>
-                  )
-                })
-              }
-
+              <span>10-11AM</span>
+              <span>11-12PM</span>
+              <span>12-1PM</span>
+              <span>1-2PM</span>
+              <span>2-3PM</span>
+              <span>3-4PM</span>
+              <span>4-5PM</span>
             </div>
           </div>
         </div>
